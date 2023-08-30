@@ -7,14 +7,17 @@ const menuList = [
   {
     icon: 'feedback',
     label: 'Módulo 1',
+    route: '/',
   },
   {
     icon: 'help',
     label: 'Módulo 2',
+    route: '/module2',
   },
   {
     icon: 'settings',
     label: 'Módulo 3',
+    route: '/module3',
   },
 ]
 
@@ -39,7 +42,7 @@ const menuList = [
       <q-scroll-area class="fit">
           <q-list>
             <template v-for="(menuItem, index) in menuList" :key="index">
-              <q-item clickable :active="menuItem.label === 'Módulo 2'" v-ripple>
+              <q-item clickable v-ripple @click="$router.push(menuItem.route)">
                 <q-item-section avatar>
                   <q-icon :name="menuItem.icon" />
                 </q-item-section>
@@ -51,19 +54,7 @@ const menuList = [
           </q-list>
         </q-scroll-area>
       </q-drawer>
-
-      <v-router></v-router>
-
-
-      <q-page-container>
-        <q-page>
-          <h1>Quasar</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit nihil praesentium molestias a adipisci, dolore vitae odit, quidem consequatur optio voluptates asperiores pariatur eos numquam rerum delectus commodi perferendis voluptate?
-          </p>
-        </q-page>
-      </q-page-container>
-      
+      <router-view></router-view>
     </q-layout>
   </div>
 </template>
