@@ -2,12 +2,10 @@
 import { loadModules } from 'esri-loader';
 
 loadModules(['esri/views/MapView', 'esri/WebMap'])
-  .then(([MapView, WebMap]) => {
+  .then(([MapView, Map]) => {
     //esriConfig.apiKey = process.env.ESRI_API_KEY;
-    const webmap = new WebMap({
-      portalItem: { // autocasts as new PortalItem()
-        id: 'bc19c34549de4000bcd91cef929420dc'
-      }
+    const webmap = new Map({
+      basemap: 'dark-gray',
     });
     const view = new MapView({
       map: webmap,
@@ -24,7 +22,6 @@ loadModules(['esri/views/MapView', 'esri/WebMap'])
 
 <template>
   <q-page>
-    <h1>Módulo 1</h1>
     <div id="esriMap"></div>
   </q-page>
 </template>
@@ -34,7 +31,7 @@ loadModules(['esri/views/MapView', 'esri/WebMap'])
 @import url('https://js.arcgis.com/4.4/esri/themes/light/main.css');
 
 #esriMap {
-  width: 800px;
-  height: 500px;
+  width: 100%;
+  height: calc(100vh - 50px);
 }
 </style>
