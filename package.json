@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@arcgis/core": "^4.27.6",
     "@quasar/extras": "^1.16.6",
     "esri-loader": "^3.7.0",
     "quasar": "^2.12.5",
