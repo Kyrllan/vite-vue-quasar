@@ -36,12 +36,9 @@ let sketchWidget = null;
 let number = 12
 
 /* let popupTemplate = new PopupTemplate({
-  title: "Lista",
-  content: (() => {
-    return "<ul><li>Feature Attribute 1: " + graphic.attributes.name + "</li>" +
-      "<li>Feature Attribute 2: " + graphic.attributes.num + "</li></ul>";
-  })
-}) */
+  title: "Population by Gender",
+  content: setContentInfo
+}); */
 
 function createMap() {
   map = new Map({
@@ -61,7 +58,6 @@ function createMap() {
     layer: sketchLayer
   })
   sketchLayer = new GraphicsLayer();
-  sketchLayer.popupTemplate = popupTemplate
   map.add(sketchLayer);
   sketchWidget = new Sketch({
     view: view,
@@ -69,8 +65,6 @@ function createMap() {
     creationMode: "update"
   })
   view.ui.add(sketchWidget, "top-right");
-
-
   sketchWidget.on("create", sketchCreate)
   view.on("click", onClickView)
   view.on("pointer-move", onMouseMoveView)
@@ -79,9 +73,11 @@ function createMap() {
 
 function sketchCreate(event) {
   if (event.state === "complete") {
+
+
+
     event.graphic.attributes = {
-      name: 'TESTE 1',
-      num: number,
+      name: `NUMERO ${number}`,
       isSketched: true
     }
     //event.graphic.popupTemplate = popupTemplate
@@ -98,10 +94,12 @@ function onMouseMoveView(event) {
     if (response.results.length > 0) {
       let graphic = response.results[0].graphic;
       if (graphic.attributes.isSketched) {
+        console.log('GRA',graphic)
         view.openPopup({
           location: graphic.geometry.centroid,
-          //features: [graphic],
-          content: `<h1>TESTE</h1>`
+          content: `<div>
+            <div>${graphic.attributes.name}</div>
+          </div>`
         });
       } else {
         view.closePopup();
@@ -109,28 +107,6 @@ function onMouseMoveView(event) {
     } else {
       view.closePopup();
     }
-
-
-
-    /*     if (response.results.length > 0) {
-          var graphic = response.results[0].graphic;
-          if (geometryEngine.contains(graphic.geometry, event.mapPoint)) {
-            // Show the popup for the hovered polygon
-            view.popup.open({
-              features: [graphic],
-              location: event.mapPoint
-            });
-          } else {
-            // Close the popup if the mouse is not over a polygon
-            view.popup.close();
-          }
-        } else {
-          // Close the popup if the mouse is not over a polygon
-          view.popup.close();
-        } */
-
-
-
   });
 }
 
