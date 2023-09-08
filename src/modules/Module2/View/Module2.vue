@@ -1,5 +1,4 @@
 <template>
-    <q-page-container>
     <q-page>
       <h1>Módulo 2</h1>
       <p>
@@ -8,5 +7,4 @@
         perferendis voluptate?
       </p>
     </q-page>
-  </q-page-container>
 </template>
